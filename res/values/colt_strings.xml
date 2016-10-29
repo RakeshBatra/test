@@ -30,5 +30,8 @@
     <string name="night_mode_auto">Automatic</string>
     <string name="keywords_display_night_mode">dark theme night mode dim screen invert brightness</string>
 
+<!-- Navigation -->
+    <string name="navigation_category">Navigation</string>
+
 
 </resources>
