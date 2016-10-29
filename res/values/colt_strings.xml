@@ -17,4 +17,8 @@
     <!-- Colt Center title and summary -->
     <string name="colt_settings_title">Colt Center</string>
     <string name="colt_settings_summary">Lets have some Customisations</string>
+
+<!-- Navigation -->
+    <string name="navigation_category">Navigation</string>
+
 </resources>

@@ -165,5 +165,8 @@ public class Settings extends SettingsActivity {
 
     // Colt Center
     public static class ColtSettingsActivity extends SettingsActivity { /* empty */ }
-
+    public static class NavigationSettingsActivity extends SettingsActivity { /* empty */ }
+    public static class FlingSettingsActivity extends SettingsActivity { /* empty */ }
+    public static class SmartbarSettingsActivity extends SettingsActivity { /* empty */ }
+    public static class PulseSettingsActivity extends SettingsActivity { /* empty */ }
 }
