@@ -30,4 +30,26 @@
     <string name="restarting_ui">Restarting UI\u2026</string>
     <string name="print_restart">Restart</string>
 
+<!-- Color engine -->
+    <string name="theme_switch_palette">Switch between primary and accent colors</string>
+    <string name="theme_title">Colt Color engine</string>
+    <string name="theme_summary">Select different colors for your current theme</string>
+    <string name="theme_accent_color">Accent color</string>
+    <string name="theme_primary_color">Primary color</string>
+    <string name="theme">Colt Themes</string>
+    <string name="oms_enabled">Theme modes unavailable because a Substratum theme is currently applied</string>
+    <string name="red">Torch Red</string>
+    <string name="orange">Vermilion</string>
+    <string name="blue">Pixel Blue</string>
+    <string name="green">Colt Lima</string>
+    <string name="yellow">Supernova</string>
+    <string name="purple">Purple Heat</string>
+    <string name="pink">Colt Rose</string>
+    <string name="dark">Colt Dark</string>
+    <string name="pixel">Pixel</string>
+    <string name="teal">Default</string>
+    <string name="cyan">Scooter</string>
+    <string name="grey">Colt Grey</string>
+    <string name="default_string">Default</string>
+
 </resources>

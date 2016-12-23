@@ -18,6 +18,10 @@ package com.android.settings;
 
 import android.app.Activity;
 import android.app.ActivityManager;
+import android.app.ActivityManagerNative;
+import android.app.AlertDialog;
+import android.app.Dialog;
+import android.app.ThemeManager;
 import android.app.UiModeManager;
 import android.app.WallpaperManager;
 import android.app.admin.DevicePolicyManager;
@@ -26,6 +30,8 @@ import com.android.settings.utils.Helpers;
 import android.content.Context;
 import android.content.ComponentName;
 import android.content.pm.PackageManager;
+import android.content.SharedPreferences;
+import android.content.DialogInterface;
 import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.hardware.Sensor;
@@ -43,8 +49,13 @@ import android.support.v7.preference.ListPreference;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.Preference.OnPreferenceChangeListener;
 import android.support.v7.preference.PreferenceCategory;
+import android.support.v7.preference.PreferenceScreen;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.widget.CheckBox;
+import android.widget.TextView;
 
 import com.android.internal.app.NightDisplayController;
 import com.android.internal.logging.MetricsLogger;
@@ -52,6 +63,8 @@ import com.android.internal.logging.MetricsProto.MetricsEvent;
 import com.android.internal.view.RotationPolicy;
 import com.android.settings.accessibility.ToggleFontSizePreferenceFragment;
 import com.android.settings.dashboard.SummaryLoader;
+import com.android.settings.display.ScreenZoomPreference;
+import com.android.settings.display.ThemePreference;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.search.Indexable;
 import com.android.settingslib.RestrictedLockUtils;
@@ -74,7 +87,7 @@ import static com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
 import cyanogenmod.hardware.CMHardwareManager;
 
 public class DisplaySettings extends SettingsPreferenceFragment implements
-        Preference.OnPreferenceChangeListener, Indexable {
+	Preference.OnPreferenceChangeListener, Indexable {
     private static final String TAG = "DisplaySettings";
 
     /** If there is no setting in the provider, use this. */
@@ -87,6 +100,8 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
     private static final String KEY_LIFT_TO_WAKE = "lift_to_wake";
     private static final String KEY_DOZE = "doze";
     private static final String KEY_TAP_TO_WAKE = "tap_to_wake";
+    private static final String KEY_SRGB = "srgb";
+    private static final String KEY_THEME = "theme";
     private static final String KEY_AUTO_BRIGHTNESS = "auto_brightness";
     private static final String KEY_AUTO_ROTATE = "auto_rotate";
     private static final String KEY_NIGHT_DISPLAY = "night_display";
@@ -97,6 +112,7 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
     private static final String KEY_VR_DISPLAY_PREF = "vr_display_pref";
 
     private Preference mFontSizePref;
+//    private WarnedPreference mDialogPref;
 
     private TimeoutListPreference mScreenTimeoutPreference;
     private ListPreference mNightModePreference;
@@ -106,6 +122,11 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
     private SwitchPreference mTapToWakePreference;
     private SwitchPreference mAutoBrightnessPreference;
     private SwitchPreference mCameraGesturePreference;
+    private ThemePreference mThemePreference;
+
+    private boolean isRJILMode;
+    private final Configuration mCurConfig = new Configuration();
+
 
     @Override
     protected int getMetricsCategory() {
@@ -270,7 +291,35 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
             mNightModePreference.setValue(String.valueOf(currentNightMode));
             mNightModePreference.setOnPreferenceChangeListener(this);
         }
+
+        mThemePreference = (ThemePreference) findPreference(KEY_THEME);
+        if (mThemePreference != null) {
+            final int accentColorValue = Settings.Secure.getInt(getContext().getContentResolver(),
+                    Settings.Secure.THEME_ACCENT_COLOR, 1);
+            final int primaryColorValue = Settings.Secure.getInt(getContext().getContentResolver(),
+                    Settings.Secure.THEME_PRIMARY_COLOR, 2);
+            mThemePreference.setSummary(PreviewSeekBarPreferenceFragment.getInfoText(getContext(),
+                    false, accentColorValue, primaryColorValue) + ", " +
+                    PreviewSeekBarPreferenceFragment.getInfoText(getContext(), true,
+                    accentColorValue, primaryColorValue));
+            if (ThemeManager.isOverlayEnabled()) {
+                mThemePreference.setEnabled(false);
+                mThemePreference.setSummary(R.string.oms_enabled);
+            }
+        }
     }
+
+//    @Override
+//    public void onPreferenceClick(Preference preference) {
+//        if (preference == mDialogPref) {
+//            if(isRJILMode) {
+//                mDialogPref.showDialog(null);
+ //               if(mDialogPref.getDialog() != null) {
+//                    mDialogPref.getDialog().show();
+//                }
+//            }
+//        }
+//    }
 
     private static boolean allowAllRotations(Context context) {
         return Resources.getSystem().getBoolean(
@@ -395,6 +444,20 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
             int value = Settings.Secure.getInt(getContentResolver(), CAMERA_GESTURE_DISABLED, 0);
             mCameraGesturePreference.setChecked(value == 0);
         }
+        if (mThemePreference != null) {
+            final int accentColorValue = Settings.Secure.getInt(getContext().getContentResolver(),
+                    Settings.Secure.THEME_ACCENT_COLOR, 1);
+            final int primaryColorValue = Settings.Secure.getInt(getContext().getContentResolver(),
+                    Settings.Secure.THEME_PRIMARY_COLOR, 2);
+            mThemePreference.setSummary(PreviewSeekBarPreferenceFragment.getInfoText(getContext(),
+                    false, accentColorValue, primaryColorValue) + ", " +
+                    PreviewSeekBarPreferenceFragment.getInfoText(getContext(), true,
+                    accentColorValue, primaryColorValue));
+            if (ThemeManager.isOverlayEnabled()) {
+                mThemePreference.setEnabled(false);
+                mThemePreference.setSummary(R.string.oms_enabled);
+            }
+        }
     }
 
     private void updateScreenSaverSummary() {
@@ -461,6 +524,22 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
             }
 		Helpers.restartSystemUI(getActivity());
         }
+
+        if (mThemePreference != null) {
+            final int accentColorValue = Settings.Secure.getInt(getContext().getContentResolver(),
+                    Settings.Secure.THEME_ACCENT_COLOR, 1);
+            final int primaryColorValue = Settings.Secure.getInt(getContext().getContentResolver(),
+                    Settings.Secure.THEME_PRIMARY_COLOR, 2);
+            mThemePreference.setSummary(PreviewSeekBarPreferenceFragment.getInfoText(getContext(),
+                    false, accentColorValue, primaryColorValue) + ", " +
+                    PreviewSeekBarPreferenceFragment.getInfoText(getContext(), true,
+                    accentColorValue, primaryColorValue));
+            if (ThemeManager.isOverlayEnabled()) {
+                mThemePreference.setEnabled(false);
+                mThemePreference.setSummary(R.string.oms_enabled);
+            }
+        }
+
         return true;
     }
 
