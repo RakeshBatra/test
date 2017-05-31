@@ -22,6 +22,7 @@ import android.app.UiModeManager;
 import android.app.WallpaperManager;
 import android.app.admin.DevicePolicyManager;
 import android.content.ContentResolver;
+import com.android.settings.utils.Helpers;
 import android.content.Context;
 import android.content.ComponentName;
 import android.content.pm.PackageManager;
@@ -458,6 +459,7 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
             } catch (NumberFormatException e) {
                 Log.e(TAG, "could not persist night mode setting", e);
             }
+		Helpers.restartSystemUI(getActivity());
         }
         return true;
     }
