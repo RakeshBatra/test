@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="card_background">#ff000000</color>
-    <color name="lock_pattern_view_regular_color">@*android:color/secondary_text_default_material_dark</color>
+    <color name="lock_pattern_view_regular_color">#ff000000</color>
     <color name="switchbar_background_color">#ff000000</color>
     <color name="theme_accent">#ff4285f4</color>
     <color name="card_background_grey">#ff000000</color>
@@ -12,5 +12,12 @@
     <color name="ga_gesture_color">#ff4285f4</color>
 
     <drawable name="fp_enrollment_header_landscape">#4285f4</drawable>
+
+    <color name="dashboard_background_color">#ff000000</color>
+    <color name="dashboard_category_background_color">#ff000000</color>
+    <color name="switch_accent_color">#4285f4</color>
+    <color name="theme_accent">#ff27e4a0</color>
+    <color name="confirm_device_credential_dark_background">#ff000000</color>
+    <color name="divider_color">#ff000000</color>
 
 </resources>
