@@ -87,10 +87,6 @@
                 android:title="@string/device_feedback">
         </PreferenceScreen>
 
-        <!-- Contributors cloud -->
-        <org.cyanogenmod.internal.cmparts.CMPartsPreference
-                android:key="contributors" />
-
         <!-- Device name -->
         <Preference android:key="device_name"
                 android:enabled="false"
@@ -122,17 +118,6 @@
                 android:shouldDisableView="false"
                 android:title="@string/mod_version"
                 android:summary="@string/mod_version_default" />
-
-        <!-- CyanogenMod API Version -->
-        <com.android.settings.DividerPreference
-                android:key="mod_api_level"
-                android:enabled="false"
-                android:selectable="false"
-                android:shouldDisableView="false"
-                android:title="@string/mod_api_level"
-                android:summary="@string/mod_api_level_default"
-                settings:allowDividerAbove="true"
-                settings:allowDividerBelow="true" />
 
         <!-- Security patch level -->
         <PreferenceScreen android:key="security_patch"
