@@ -21,7 +21,6 @@
 
 	<!-- ColtOS Logo in About Settings -->
 	<PreferenceScreen android:key="colt_logo"
-			  android:enabled="false"
      			  android:layout="@layout/colt_logo_row" />
 
         <!-- System update settings - launches activity -->
