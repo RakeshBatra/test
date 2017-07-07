@@ -44,6 +44,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
+import com.colt.settings.preferences.CustomDialogPref;
 import com.android.settings.applications.LayoutPreference;
 import com.android.settings.widget.FloatingActionButton;
 import com.android.settingslib.HelpUtils;
@@ -578,6 +579,9 @@ public abstract class SettingsPreferenceFragment extends InstrumentedPreferenceF
                     .newInstance(preference.getKey());
         } else if (preference instanceof CustomDialogPreference) {
             f = CustomDialogPreference.CustomPreferenceDialogFragment
+                    .newInstance(preference.getKey());
+	} else if (preference instanceof CustomDialogPref) {
+            f = CustomDialogPref.CustomPreferenceDialogFragment
                     .newInstance(preference.getKey());
         } else if (preference instanceof CustomEditTextPreference) {
             f = CustomEditTextPreference.CustomPreferenceDialogFragment
