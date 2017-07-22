@@ -136,6 +136,7 @@ import com.android.settingslib.drawer.DashboardCategory;
 import com.android.settingslib.drawer.SettingsDrawerActivity;
 import com.android.settingslib.drawer.Tile;
 import com.colt.settings.ColtSettings;
+import com.colt.settings.ColtSettingsLayout;
 import com.colt.settings.fragments.FlingSettings;
 import com.colt.settings.fragments.NavbarSettings;
 import com.colt.settings.fragments.SmartbarSettings;
@@ -378,6 +379,7 @@ public class SettingsActivity extends SettingsDrawerActivity
             ManageDomainUrls.class.getName(),
             AutomaticStorageManagerSettings.class.getName(),
 	    ColtSettings.class.getName(),
+	    ColtSettingsLayout.class.getName(),
             NavbarSettings.class.getName(),
             FlingSettings.class.getName(),
             SmartbarSettings.class.getName(),
