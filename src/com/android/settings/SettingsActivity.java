@@ -147,8 +147,10 @@ import com.colt.settings.fragments.FlingSettings;
 import com.colt.settings.fragments.NavbarSettings;
 import com.colt.settings.fragments.SmartbarSettings;
 import com.colt.settings.fragments.PulseSettings;
+import com.colt.settings.fragments.PieSettings;
 
 import java.net.URISyntaxException;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
@@ -389,7 +391,8 @@ public class SettingsActivity extends SettingsDrawerActivity
             NavbarSettings.class.getName(),
             FlingSettings.class.getName(),
             SmartbarSettings.class.getName(),
-            PulseSettings.class.getName()
+            PulseSettings.class.getName(),
+            PieSettings.class.getName()
     };
 
 
