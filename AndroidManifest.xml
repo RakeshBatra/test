@@ -3173,7 +3173,11 @@
                 android:value="true" />
         </activity>
 
-        <!-- activity for gesture settings -->
+	<!-- Gesture Anywhere -->
+        <activity android:name="com.colt.settings.gestureanywhere.GestureAnywhereBuilderActivity" />
+        <activity android:name="com.colt.settings.gestureanywhere.GestureAnywhereCreateGestureActivity" />        
+
+	<!-- activity for gesture settings -->
         <activity android:name="Settings$GestureSettingsActivity"
                   android:label="@string/gesture_preference_title"
                   android:icon="@drawable/ic_settings_gestures"
