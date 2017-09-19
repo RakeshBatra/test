@@ -1,5 +1,10 @@
 PRODUCT_BRAND ?= ColtOS
 
+# BootAnimation
+PRODUCT_COPY_FILES += \
+    vendor/lineage/prebuilt/common/bootanimation/bootanimation.zip:system/media/bootanimation.zip
+
+
 PRODUCT_BUILD_PROP_OVERRIDES += BUILD_UTC_DATE=0
 
 ifeq ($(PRODUCT_GMS_CLIENTID_BASE),)
@@ -96,10 +101,6 @@ endif
 ifeq ($(WITH_TWRP),true)
 include vendor/lineage/config/twrp.mk
 endif
-
-# Bootanimation
-PRODUCT_PACKAGES += \
-    bootanimation.zip
 
 # Required Lineage packages
 PRODUCT_PACKAGES += \
