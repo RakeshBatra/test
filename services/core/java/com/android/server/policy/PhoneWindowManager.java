@@ -1604,7 +1604,7 @@ public class PhoneWindowManager implements WindowManagerPolicy {
             }
         }
     }
-
+}
     private void interceptPowerKeyUp(KeyEvent event, boolean interactive, boolean canceled) {
         final boolean handled = canceled || mPowerKeyHandled;
         mPowerKeyTriggered = false;
@@ -6857,6 +6857,8 @@ public class PhoneWindowManager implements WindowManagerPolicy {
             default:
                 Log.w(TAG, "getVolumeWakeTriggered: unexpected keyCode=" + keyCode);
                 return false;
+	}
+     }
 
     // Assume this is called from the Handler thread.
     private void takeScreenrecord() {
