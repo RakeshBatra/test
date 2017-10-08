@@ -35,6 +35,9 @@ import com.android.settings.notification.SoundSettings;
 import com.android.settings.system.SystemDashboardFragment;
 import com.android.settingslib.drawer.CategoryKey;
 
+import com.colt.settings.ColtSettings;
+import com.colt.settings.ColtSettingsLayout;
+
 import java.util.Map;
 
 /**
@@ -86,6 +89,10 @@ public class DashboardFragmentRegistry {
                 CategoryKey.CATEGORY_SYSTEM_DEVELOPMENT);
         PARENT_TO_CATEGORY_KEY_MAP.put(ConfigureNotificationSettings.class.getName(),
                 CategoryKey.CATEGORY_NOTIFICATIONS);
+	PARENT_TO_CATEGORY_KEY_MAP.put(ColtSettings.class.getName(),
+                CategoryKey.CATEGORY_SYSTEM_DEVELOPMENT);
+        PARENT_TO_CATEGORY_KEY_MAP.put(ColtSettingsLayout.class.getName(),
+                CategoryKey.CATEGORY_SYSTEM_DEVELOPMENT);
 
         CATEGORY_KEY_TO_PARENT_MAP = new ArrayMap<>(PARENT_TO_CATEGORY_KEY_MAP.size());
 
