@@ -19,9 +19,11 @@ package com.colt.settings.fragments;
 import android.os.Bundle;
 import android.support.v7.preference.PreferenceScreen;
 
-import com.android.internal.logging.MetricsProto.MetricsEvent;
+import com.android.internal.logging.nano.MetricsProto;
 
 import com.android.settings.R;
+import com.android.settings.SettingsPreferenceFragment;
+import com.android.settings.development.DevelopmentSettings;
 import com.android.settings.SettingsPreferenceFragment;
 
 public class LockScreenSettings extends SettingsPreferenceFragment {
@@ -35,6 +37,6 @@ public class LockScreenSettings extends SettingsPreferenceFragment {
 
     @Override
     protected int getMetricsCategory() {
-        return MetricsEvent.COLT;
+        return MetricsProto.MetricsEvent.COLT;
     }
 }

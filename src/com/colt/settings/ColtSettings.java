@@ -25,7 +25,7 @@ import android.support.v7.preference.PreferenceScreen;
 
 import com.android.settings.Utils;
 
-import com.android.internal.logging.MetricsProto.MetricsEvent;
+
 
 import com.android.settings.SettingsPreferenceFragment;
 
@@ -36,7 +36,7 @@ private static final String TAG = "ColtSettings";
 
     @Override
     protected int getMetricsCategory() {
-        return MetricsEvent.COLT;
+        return MetricsProto.MetricsEvent.COLT;
     }
 
 
